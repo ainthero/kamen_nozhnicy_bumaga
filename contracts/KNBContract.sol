@@ -46,17 +46,21 @@ contract KNBContract {
         emit PlayerRevealed(msg.sender, _choice);
     }
 
-    function determineWinner(address player1, address player2) external onlyHost {
+    function determineWinner(address player1, address player2) public returns (address) {
         require(players[player1].choice != Choice.None && players[player2].choice != Choice.None, "Both players should have revealed their choices");
-
+        address winner;
         if (players[player1].choice == players[player2].choice) {
+            winner = address(0);
             emit GameResult("It's a draw", address(0));
         } else if ((players[player1].choice == Choice.Rock && players[player2].choice == Choice.Scissors) || 
                    (players[player1].choice == Choice.Paper && players[player2].choice == Choice.Rock) || 
                    (players[player1].choice == Choice.Scissors && players[player2].choice == Choice.Paper)) {
+            winner = player1;        
             emit GameResult("Player1 wins", player1);
         } else {
+            winner = player2;
             emit GameResult("Player2 wins", player2);
         }
+        return winner;
     }
 }

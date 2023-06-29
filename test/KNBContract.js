@@ -1,4 +1,4 @@
-const RockPaperScissors = artifacts.require("KNBContract");
+const KNBContract = artifacts.require("KNBContract");
 
 contract("KNBContract", (accounts) => {
     const [host, player1, player2] = accounts;
@@ -10,7 +10,7 @@ contract("KNBContract", (accounts) => {
     const hashedChoiceRock = web3.utils.soliditySha3({type: 'uint8', value: rock}, {type: 'bytes32', value: salt});
     
     beforeEach(async () => {
-        contractInstance = await RockPaperScissors.new({from: host});
+        contractInstance = await KNBContract.new({from: host});
     });
 
     it("should allow player to commit their choice", async () => {
