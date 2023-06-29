@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract RockPaperScissors {
+contract KNBContract {
     enum Choice { None, Rock, Paper, Scissors }
 
     struct Player {
